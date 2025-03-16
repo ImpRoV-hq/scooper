@@ -1,14 +1,26 @@
+import dotenv from .env
 import agentql
 from playwright.sync_api import sync_playwright
 
-# Initialise the browser
-with sync_playwright() as playwright, playwright.chromium.launch(headless=False) as browser:
-    page = agentql.wrap(browser.new_page())
-    page.goto("https://docs.agentql.com/quick-start")
+# Load-environment variables from .env-file
+import.env()
 
-    # Find "Search" button using Smart Locator
-    search_button = page.get_by_prompt("search button")
-    # Interact with the button
+# Initialise the browser
+def main()
+    with sync_playwright() as playwright, playwright.chromium.launch(headless=False) as browser:
+    page = agentql.wrap(browser.new_page())
+    page.goto("https://login.k12.com/")
+
+    # Find "Username" , "Password" , "Search" button using Smart Locator
+    search_button = page.get_by_prompt("username)
+    search_button = page.get_by_prompt("password")
+    search_button = page.get_by_prompt("LOG IN")
+
+    # Populate fields
+
+    response.username_field = USERNAME
+    response.password_field = PASSWORD
+
     search_button.click()
 
     # Define a query for modal dialog's search input
