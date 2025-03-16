@@ -1,17 +1,18 @@
 import os
 import agentql
 from playwright.sync_api import sync_playwright
+
 from pyairtable import Api
 from dotenv import load_dotenv
-
+from env2 import *
 
 # Load-environment variables from .env-file
 load_dotenv()
 
 # Get username and password from environment variables
-USERNAME = os.getenv("USERNAME")
-PASSWORD = os.getenv("PASSWORD")
-os.environ["AGENTQL_API_KEY"] = os.getenv("AGENTQL_API_KEY")
+USERNAME = USERNAME
+PASSWORD = PASSWORD
+os.environ["AGENTQL_API_KEY"] = AGENTQL_API_KEY
 
 URL = "https://login.k12.com/"
 
@@ -28,7 +29,7 @@ LOGIN_QUERY ="""
 def main():
     with sync_playwright() as p, p.chromium.launch(headless=False) as browser:
 
-        page = agentql.wrap_page(browser.new_page())
+        page = browser.new_page()
 
         # Navigate to the URL
         page.goto(URL)
@@ -37,8 +38,8 @@ def main():
         response = page.query_elements(LOGIN_QUERY)
 
         # Fill the username and password fields
-        response.username_field = ("USERNAME")
-        response.password_field = ("PASSWORD")
+        response.username_field = USERNAME
+        response.password_field = PASSWORD
 
         # Fill the submit button
         response.submit_btn()
