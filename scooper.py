@@ -20,24 +20,60 @@ Gio_Weekly_View_Query = """
 
 Scrape_Query = """
 {
-    enrollmenttable[] {
-        Monday[] {
-        assignment
+    monday[]{
+        day
         class
         required
-        session type
         time
-                }
-                    }
-        Tuesday[] {
-        assignment
+    }
+    mondayassignment[]{
+        date
+        class
+        icon
+    }
+    tuesday[]{
+        day
         class
         required
-        session type
         time
-                }
+    }
+    tuesdayassignment[]{
+        day(Tuesday)
+        class
+        icon
+    }
+    wednesday[]{
+        class
+        required
+        time
+    }
+    wednesdayassignment[]{
+        day
+        class
+        icon
+    }
+    thursday[]{
+        class
+        required
+        time
+    }
+    thursdayassignment[]{
+        day
+        class
+        icon
+    }
+    friday[]{
+        class
+        required
+        time
+    }
+    fridayassignment[]{
+        day
+        class
+        icon
+    }
 }
-"""
+
 
 def main():
     with sync_playwright() as p, p.chromium.launch(headless=False) as browser:
